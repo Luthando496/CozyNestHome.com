@@ -9,9 +9,7 @@ const Header = () => {
     const pathMatch=(route)=>{
         if(route === location.pathname){
             return true;
-        }else{
-            return false
-        };
+        }
     }
     
     
@@ -25,8 +23,8 @@ const Header = () => {
             <div>
                 <ul className='flex space-x-10'>
                     <li onClick={()=> navigate('/')} className={`py-4 text-gray-400 cursor-pointer text-md font-semibold hover:text-pink-400 duration-700 border-b-[3px] border-b-transparent ${pathMatch('/') && 'border-b-[3px] border-b-amber-400 text-black'}`}>Home</li>
-                    <li onClick={()=> navigate('/offers')} className={`py-4 text-gray-400 cursor-pointer text-md font-semibold hover:text-pink-400 duration-700 border-b-[3px] border-b-transparent ${pathMatch('/offers') && 'border-b-[3px] border-b-amber-400 text-black'}`}>Offers</li>
-                    <li onClick={()=> navigate('/sign-in')} className={`py-4 text-gray-400 cursor-pointer text-md font-semibold hover:text-pink-400 duration-700 border-b-[3px] border-b-transparent ${pathMatch('/sign-in') && 'border-b-[3px] border-b-amber-400 text-black'}`}>Sign In</li>
+                    <li onClick={()=> navigate('/offers')} className={`py-4 text-gray-400 cursor-pointer text-md font-semibold hover:text-pink-400 duration-700 ${pathMatch('/offers') && 'border-b-[3px] border-b-amber-400 text-black'}`}>Offers</li>
+                    <li onClick={()=> navigate('/sign-in')} className={`py-4 text-gray-400 cursor-pointer text-md font-semibold hover:text-pink-400 duration-300  ${pathMatch('/sign-in') && ' border-b-amber-400 border-b-[3px] text-black'}`}>Sign In</li>
                 </ul>
             </div>
         </header>
