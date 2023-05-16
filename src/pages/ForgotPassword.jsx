@@ -3,7 +3,11 @@ import {AiFillEyeInvisible,AiFillEye} from 'react-icons/ai'
 import {BsFillPersonFill} from 'react-icons/bs'
 import {Link} from 'react-router-dom'
 import GoogleBtn from '../components/GoogleBtn'
-
+import {sendPasswordResetEmail} from 'firebase/auth'
+import {auth, db} from '../../firebase'
+import { doc, serverTimestamp, setDoc } from 'firebase/firestore'
+import {useNavigate} from 'react-router-dom'
+import {toast} from 'react-hot-toast'
 
 
 const ForgotPassword = () => {
@@ -21,9 +25,15 @@ const ForgotPassword = () => {
   setData((prevState)=>({...prevState, [e.target.id]: e.target.value}))
   }
 
-  const Submit =(e)=>{
+  const Submit =async(e)=>{
     e.preventDefault()
-    console.log(formData)
+    try{
+      await sendPasswordResetEmail(auth.currentUser,email)
+      toast.success('Password reset email sent')
+
+    }catch(error){
+      toast.error('could not send to email')
+    }
   }
 
   const {email, password} = formData
@@ -41,7 +51,7 @@ const ForgotPassword = () => {
               <div className="mb-10 md:mb-none">
                 <label className="block text-slate-700 text-xl font-bold mb-2">Email</label>
                 <div className="w-full relative">
-                <input onChange={changeHandler}  type="email" value={email} className="shadow appearance-none border rounded w-full py-4 px-12 text-slate-700 leading-tight focus:outline-none transition-all focus:shadow-outline" id="email" placeholder="Email" />
+                <input onChange={changeHandler} required  type="email" value={email} className="shadow appearance-none border rounded w-full py-4 px-12 text-slate-700 leading-tight focus:outline-none transition-all focus:shadow-outline" id="email" placeholder="Email" />
                 <BsFillPersonFill className='absolute top-4 left-2 text-2xl' />
                   
                 </div>
