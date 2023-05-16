@@ -10,7 +10,6 @@ const SignIn = () => {
   const [formData, setData] = useState({
     email: '',
     password: '',
-    name:''
   })
 
   const [showPassword, setShowPassword] = useState(false)
@@ -28,7 +27,7 @@ const SignIn = () => {
     console.log(formData)
   }
 
-  const {email, password, name} = formData
+  const {email, password} = formData
   return (
     <section>
           <h1 className='text-center text-3xl text-black/90 font-bold mt-8 font-rale tracking-[4px]'>Sign In</h1>
@@ -56,17 +55,13 @@ const SignIn = () => {
                 {showPassword && <AiFillEye onClick={changePassword} className='text-3xl absolute top-3 right-5' />}
                 </div>
               </div>
-              <div className="mb-10 md:mt-4">
-                <label className="block text-slate-700 text-xl font-bold mb-2">Name</label>
-                <input onChange={changeHandler}  type="text" value={name} className="shadow appearance-none border rounded w-full py-4 px-12 text-slate-700 leading-tight focus:outline-none focus:border focus:border-amber-300 focus:shadow-outline" id="name" placeholder="Name" />
-              </div>
 
               <div className="w-full flex flex-col space-y-4 lg:space-y-0 lg:flex-row justify-between">
-                <p className="text-md text-black">Don't have an account? <Link className='text-red-500' to='/sign-up'>Register</Link></p>
+                <p className="text-md text-black">Don't have an account? <Link className='text-red-500' to='/register'>Register</Link></p>
                 <div className="text-md text-black"> <Link to='/forgot-password'>Forgot Password</Link></div>
               </div>
 
-              <button type='submit' onClick={Submit} className="w-full shadow-lg active:bg-sky-700 px-12 text-center py-4 text-md tracking-[4px] rounded-md bg-sky-500 hover:bg-sky-700 duration-700 text-white font-rail font-semibold uppercase mt-12">Sign In</button>
+              <button type='submit' onClick={Submit} className="w-full shadow-lg active:bg-sky-700 px-12 text-center py-4 text-md tracking-[4px] rounded-md bg-sky-500 hover:bg-sky-700 duration-700 text-white font-rail font-semibold uppercase mt-12">Register</button>
               <div className="my-6  flex  items-center before:border-gray-400 before:flex-1 before:border-t after:border-gray-400 after:flex-1 after:border-t">
                 <p className="text-center text-md font-rail tracking-[2px] font-bold mx-4">OR</p>
               </div>
