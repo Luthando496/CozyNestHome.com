@@ -3,7 +3,11 @@ import {AiFillEyeInvisible,AiFillEye} from 'react-icons/ai'
 import {BsFillPersonFill} from 'react-icons/bs'
 import {Link} from 'react-router-dom'
 import GoogleBtn from '../components/GoogleBtn'
-
+import {signInWithEmailAndPassword,updateProfile} from 'firebase/auth'
+import {auth, db} from '../../firebase'
+import { doc, serverTimestamp, setDoc } from 'firebase/firestore'
+import {useNavigate} from 'react-router-dom'
+import {toast} from 'react-hot-toast'
 
 
 const SignIn = () => {
@@ -11,6 +15,8 @@ const SignIn = () => {
     email: '',
     password: '',
   })
+  
+  const navigate = useNavigate();
 
   const [showPassword, setShowPassword] = useState(false)
   const changePassword = () => {
@@ -22,9 +28,18 @@ const SignIn = () => {
   setData((prevState)=>({...prevState, [e.target.id]: e.target.value}))
   }
 
-  const Submit =(e)=>{
+  const Submit =async(e)=>{
     e.preventDefault()
-    console.log(formData)
+    try{
+      const useCredentials =  await signInWithEmailAndPassword(auth, email, password)
+      if(useCredentials.user){
+        navigate('/')
+      }
+      toast.success('Successfully Logged In!');
+    }catch(error){
+      console.log(error)
+      toast.error('Bad user credentials')
+    }
   }
 
   const {email, password} = formData
